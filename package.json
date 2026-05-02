@@ -1,0 +1,14 @@
+{
+  "name": "bharatcms-storefront",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "templates/*",
+    "shared"
+  ],
+  "scripts": {
+    "dev:ecommerce": "npm run dev --workspace=templates/ecommerce",
+    "dev:booking": "npm run dev --workspace=templates/booking",
+    "build:all": "npm run build --workspaces --if-present"
+  }
+}
