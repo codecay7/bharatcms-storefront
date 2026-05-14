@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"\;
+
 function SuccessContent() {
   const params = useSearchParams();
   const orderId = params.get("orderId");
@@ -54,7 +56,7 @@ function SuccessContent() {
         <div className="flex flex-col gap-3">
           {orderId && (
             
-              href={`${process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"}/api/invoices/${orderId}/download`}
+              href={STRAPI_URL + "/api/invoices/" + orderId + "/download"}
               className="w-full flex items-center justify-center gap-2 py-3.5 rounded-lg font-bold text-sm transition-all active:scale-95"
               style={{
                 background: "#a8e8ff",
@@ -71,15 +73,14 @@ function SuccessContent() {
               background: "rgba(255,255,255,0.05)",
               color: "#bbc9cf",
               border: "1px solid rgba(255,255,255,0.09)",
-            }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"; }}>
+            }}>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             Back to Store
           </Link>
         </div>
+
       </div>
     </div>
   );
