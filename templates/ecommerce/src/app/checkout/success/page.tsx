@@ -3,24 +3,18 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"\;
-
 function SuccessContent() {
   const params = useSearchParams();
   const orderId = params.get("orderId");
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
   return (
     <div className="min-h-screen relative overflow-x-hidden flex items-center justify-center" style={{ backgroundColor: "#0e1417" }}>
-
-      {/* Ambient blobs */}
       <div className="pointer-events-none fixed top-0 right-0 w-96 h-96 rounded-full opacity-[0.15]"
         style={{ background: "radial-gradient(circle, #00d4ff 0%, transparent 70%)", filter: "blur(100px)", transform: "translate(30%, -30%)" }} />
       <div className="pointer-events-none fixed bottom-0 left-0 w-80 h-80 rounded-full opacity-[0.08]"
         style={{ background: "radial-gradient(circle, #7c3aed 0%, transparent 70%)", filter: "blur(90px)", transform: "translate(-30%, 30%)" }} />
-
       <div className="relative z-10 text-center max-w-md w-full px-4">
-
-        {/* Success icon */}
         <div className="flex justify-center mb-8">
           <div className="relative">
             <div className="absolute inset-0 rounded-full opacity-30 animate-ping"
@@ -37,14 +31,12 @@ function SuccessContent() {
             </div>
           </div>
         </div>
-
         <h1 className="text-3xl font-extrabold mb-2" style={{ color: "#dde3e7", letterSpacing: "-0.02em" }}>
           Payment Successful!
         </h1>
         <p className="text-sm mb-6" style={{ color: "#859398" }}>
           Your GST invoice has been generated and will be available shortly.
         </p>
-
         {orderId && (
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl mb-8"
             style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)" }}>
@@ -52,11 +44,10 @@ function SuccessContent() {
             <span className="text-sm font-mono font-bold" style={{ color: "#a8e8ff" }}>{orderId}</span>
           </div>
         )}
-
         <div className="flex flex-col gap-3">
           {orderId && (
-            
-              href={STRAPI_URL + "/api/invoices/" + orderId + "/download"}
+            <a
+              href={strapiUrl + "/api/invoices/" + orderId + "/download"}
               className="w-full flex items-center justify-center gap-2 py-3.5 rounded-lg font-bold text-sm transition-all active:scale-95"
               style={{
                 background: "#a8e8ff",
@@ -80,7 +71,6 @@ function SuccessContent() {
             Back to Store
           </Link>
         </div>
-
       </div>
     </div>
   );
